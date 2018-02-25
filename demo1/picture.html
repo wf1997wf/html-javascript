@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>picture</title>
+</head>
+<body>
+    <canvas id="myCanvas">抱歉，您的浏览器还不支持canvas。</canvas>
+    <input type="file" id="myFile" />
+
+    <div style="float:right;margin-right:20px;">
+        <a href="javascript:void(0);"imgclass="button1"onClick="javascript:document.body.style.background='url(images/bg/1.jpg)'"></a>
+        <a href="javascript:void(0);"imgclass="button2"onClick="javascript:document.body.style.background='url(images/bg/2.jpg)'"></a>
+        <a href="javascript:void(0);"imgclass="button3"onClick="javascript:document.body.style.background='url(images/bg/3.jpg)'"></a>
+        <a href="javascript:void(0);"imgclass="button4"onClick="javascript:document.body.style.background='url(images/bg/4.jpg)'"></a>
+        <a href="javascript:void(0);"imgclass="button5"onClick="javascript:document.body.style.background='url(images/bg/5.jpg)'"></a>
+        <a href="javascript:void(0);"imgclass="button6"onClick="javascript:document.body.style.background='url(images/bg/6.jpg)'"></a>
+    </div>
+
+    <script>
+        var myCanvas = document.getElementById('myCanvas');
+        var myFile = document.getElementById('myFile');
+
+        file.onchange = function(event) {
+            var selectedFile = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = putImage2Canvas;
+            reader.readAsDataURL(selectedFile);
+        }
+
+        function putImage2Canvas(event) {
+            var img = new Image();
+            img.src = event.target.result;
+            img.onload = function(){
+                myCanvas.width = img.width;
+                myCanvas.height = img.height;
+                var context = myCanvas.getContext('2d');
+                context.drawImage(img, 0, 0);
+                var imgdata = context.getImageData(0, 0, img.width, img.height);
+                // 处理imgdata
+            }
+        }
+
+        //context.drawImage(img, x, y);将图片左上角置于坐标相对于画布的(x, y)点上，将超出画布的部分舍弃
+        //context.drawImage(img, x, y, width, height);指定指定图片绘制位置的同时图像的尺寸,新绘制的图像会根据指定的尺寸进行放大或缩小
+        //context.drawImage(img, sx, sy, swidth, sheight, x, y, width, height);截取图片的一部分进行绘制
+        //              sx和sy指定图像被截取部分左上角在图片上的坐标，swidth和sheight指定图像被截取部分的尺寸，
+        //              x和y指定图像被截取部分画在画布上的位置，width和height指定图像被截取部分在画布上重绘的尺寸。
+
+        //getImageData方法用来获取canvas画布中图像的像素数据
+        //context.getImageData(x, y, width, height);返回的数据是一个对象，此对象包含三个属性，分别是data、width和height
+        //             其中data就是图像的像素数据。data是一个一维数组，顺次记录着每个像素点的RGBA信息。
+        //             R代表红色，G代表绿色，B代表蓝色，A代表不透明度，其取值范围均为0-255。对于A，0代表完全透明，255代表完全不透明。
+        /* 由于data是一个一维数组，所以在处理数据时应以每4个元素为单位读取data
+        * for(var i=0, len=imgdata.data.length; i<len; i+=4) {
+                var r = imgdata.data[i],
+                    g = imgdata.data[i+1],
+                    b = imgdata.data[i+2],
+                    a = imgdata.data[i+3];
+                    // 处理像素数据
+           }
+           比如最简单的反色操作:
+           for(var i=0, len= imgdata.data.length; i<len; i+=4) {
+                imgdata.data[i] = 255-imgdata.data[i];
+                imgdata.data[i+1] = 255-imgdata.data[i+1];
+                imgdata.data[i+2] = 255-imgdata.data[i+2];
+            }
+        * */
+
+        //putImageData(imgdata, x, y);数据处理完毕后可以通过putImageData将处理结果输出到画布上
+
+        function mousePosition(ev){
+            if(ev.pageX || ev.pageY){
+                return {x:ev.pageX, y:ev.pageY};
+            }
+            return {
+                x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                y:ev.clientY + document.body.scrollTop - document.body.clientTop// posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+                                                                                    //posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+            };
+        }
+        document.onmousemove = mouseMove;
+        function mouseMove(ev){
+            ev = ev || window.event;
+            var mousePos = mousePosition(ev);
+            document.getElementByIdx('mouseXPosition').value = mousePos.x;
+            document.getElementByIdx('mouseYPosition').value = mousePos.y;
+        }
+
+
+    </script>
+</body>
+</html>

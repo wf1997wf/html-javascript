@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>age2</title>
+    <script>
+        function get(a)
+        {
+            if(a=="f_canvas")
+            {
+                var data=new Array(100,50,30,40,60,70,40,50,90,30);
+                return data;
+            }
+            else
+            {
+                var data=new Array(80,90,50,30,20,10,40,50,90,30);
+                return data;
+            }
+        }
+        function max()
+        {
+            var data_a=get("f_canvas");
+            var data_b=get("m_canvas");
+            var maxnum=0;
+            for(var i=0;i<10;i++)
+            {
+                if(data_a[i]>maxnum)
+                {
+                    maxnum=data_a[i];
+                }
+            }
+            for(i=0;i<10;i++)
+            {
+                if(data_b[i]>maxnum)
+                {
+                    maxnum=data_b[i];
+                }
+            }
+            if(maxnum%10==0)
+            {
+                return maxnum+10;
+            }
+            else
+            {
+                return maxnum+(10-maxnum%10);
+            }
+        }
+        function num()
+        {
+            var a=2;
+            return a;
+        }
+        function init(a,scale)
+        {
+            var canvas = document.getElementById(a);
+            var context = canvas.getContext("2d");
+
+            context.moveTo(0,0);
+            context.lineTo(622,0);
+            context.stroke();
+
+            if(a=="m_canvas")
+            {
+                context.fillStyle="black";
+                context.font="20px Arial";
+                context.fillText("男",300,20);
+            }
+            else
+            {
+                context.fillStyle="black";
+                context.font="20px Arial";
+                context.fillText("女",300,20);
+            }
+
+            var data=get(a);
+            for(var i=0;i<10;i++)
+            {
+                if(a=="m_canvas")
+                {
+                    context.fillStyle="green";
+                    context.fillRect(622*(1-data[i]/scale),90+i*40+(i-1)*10,622*(data[i]/scale),40);
+                    context.font="10px Arial";
+                    context.fillText(data[i],622*(1-data[i]/scale)-10,90+i*40+(i-1)*10);
+                }
+                else
+                {
+                    context.fillStyle="green";
+                    context.fillRect(0,90+i*40+(i-1)*10,622*(data[i]/scale),40);
+                    context.font="10px Arial";
+                    context.fillText(data[i],622*(data[i]/scale),90+i*40+(i-1)*10);
+                }
+            }
+        }
+        function init_word()
+        {
+            var numb=num();
+            for(var i=0;i<10;i++)
+            {
+                document.getElementById(i).innerHTML=numb+""+i;
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+
+    <div style="position:relative">
+        <hr style="width:1px;height:600px;" color="#D3D3D3">
+
+        <div id="m" style="position:absolute;left:0px;top:0px;">
+            <canvas id="m_canvas" width="622" height="600"></canvas>
+        </div>
+
+        <div id="f" style="position:absolute;left:626px;top:0px;">
+            <canvas id="f_canvas" width="622" height="600"></canvas>
+        </div>
+        <p id="0" style="position:absolute;left:615px;top:75px;">10</p>
+        <p id="1" style="position:absolute;left:615px;top:125px;">11</p>
+        <p id="2" style="position:absolute;left:615px;top:175px;">12</p>
+        <p id="3" style="position:absolute;left:615px;top:225px;">13</p>
+        <p id="4" style="position:absolute;left:615px;top:275px;">14</p>
+        <p id="5" style="position:absolute;left:615px;top:325px;">15</p>
+        <p id="6" style="position:absolute;left:615px;top:375px;">16</p>
+        <p id="7" style="position:absolute;left:615px;top:425px;">17</p>
+        <p id="8" style="position:absolute;left:615px;top:475px;">18</p>
+        <p id="9" style="position:absolute;left:615px;top:525px;">19</p>
+
+    </div>
+
+    <script>
+        var scale=max();
+        init("m_canvas",scale);
+        init("f_canvas",scale);
+        init_word();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function writeText(txt){
+            document.getElementById("desc").innerHTML=txt;
+        }
+        function disappear(i){
+            document.getElementsByTagName("map");
+        }
+    </script>
+</head>
+<body>
+
+    <img id="background"src="1.jpg" alt="no picture" width="1200" height="400" usemap="#map"/>
+    <img id="prople1"src="2.jpg" alt="no picture" width="100" height="100"/>
+    <img id="prople2"src="3.jpg" alt="no picture" width="200" height="200"/>
+    <img id="prople3"src="4.jpg" alt="no picture" width="300" height="300"/>
+    <img id="prople4"src="5.jpg" alt="no picture" width="400" height="400"/>
+
+    <canvas id="myCanvas">抱歉，您的浏览器还不支持canvas。</canvas>
+
+    <map name="map">
+        <area shape="rect" coords="0,0,100,100"
+              onmouseover="writeText('太阳和气体巨星类似木星是太阳系中最大的物体。')"
+              onmouseout="disappear(1)"
+              alt="people1" target ="_blank" href="2.jpg"/>
+        <area shape="circle" coords="200,200,100"
+              onmouseover="writeText('太阳和气体巨星类似木星是太阳系中最大的物体。')"
+              onmouseout="disappear()"
+              alt="people2" target ="_blank" href="eg2.htm"/>
+        <area shape="poly" coords="300,300,400,300,400,400,300,400"
+              onmouseover="writeText('太阳和气体巨星类似木星是太阳系中最大的物体。')"
+              onmouseout="disappear()"
+              alt="people3" target ="_blank" href="qaq.htm"/>
+    </map>
+    <p id="desc">鼠标在太阳和星星上移动，可以看到不同的描述。</p>
+
+</body>
+</html>

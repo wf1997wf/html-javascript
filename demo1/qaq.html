@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>qaq</title>
+</head>
+<body>
+    <p>Hello World 1</p>
+    <p>Hello World 2</p>
+    <!--p中内容-->
+    <!--
+    <script>
+        var paragraphs = document.getElementsByTagName("p");/*p中的两行内容*/
+        for (var i = 0; (i +i)< paragraphs.length; i++) {//paragraphs.length=2
+            var paragraph = paragraphs.item(i);//paragraph为paragraphs的第几行
+            paragraph.innerHTML = "hhhh";//innerHTML：属性设置表格行的开始和结束标签之间的 HTML
+        }
+    </script>
+    -->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+        //d3.select("body").selectAll("p").text("qaq");//使用d3将p中内容改为qaq
+        //选择<body>中所有的<p>，其文本内容为 qaq，选择集保存在变量 p 中
+        var p = d3.select("body")
+            .selectAll("p")
+            .text("qaq");//使用 d3.select() 或 d3.selectAll() 选择元素后返回的对象，就是选择集
+
+        //修改段落的颜色和字体大小
+        p.style("color","red")
+            .style("font-size","72px");
+    </script>
+</body>
+</html>

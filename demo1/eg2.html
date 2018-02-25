@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eg2</title>
+
+    <script>
+        function lighton(){
+            document.getElementById('myimage').src="2.jpg";
+        }
+        function lightoff(){
+            document.getElementById('myimage').src="1.jpg";
+        }
+    </script>
+</head>
+<body>
+
+    <img id="myimage" onmousedown="lighton()" onmouseup="lightoff()" src="1.jpg" width="100" height="180" />
+    <p>点击不释放鼠标灯将一直亮着!</p>
+
+
+</body>
+</html>

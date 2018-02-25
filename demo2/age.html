@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>age</title>
+    <script>
+        function get(a)
+        {
+            if(a=="m_canvas")
+            {
+                var data=new Array(100,50,30,40,60,70,80,50);
+                return data;
+            }
+            else
+            {
+                var data=new Array(80,90,50,30,20,10,0,0);
+                return data;
+            }
+        }
+        function max()
+        {
+            var data_a=get("f_canvas");
+            var data_b=get("m_canvas");
+            var maxnum=0;
+            for(var i=0;i<8;i++)
+            {
+                if(data_a[i]>maxnum)
+                {
+                    maxnum=data_a[i];
+                }
+            }
+            for(i=0;i<8;i++)
+            {
+                if(data_b[i]>maxnum)
+                {
+                    maxnum=data_b[i];
+                }
+            }
+            if(maxnum%10==0)
+            {
+                return maxnum+10;
+            }
+            else
+            {
+                return maxnum+(10-maxnum%10);
+            }
+        }
+        function cli(a,b,c)
+        {
+            //给canvas添加点击事件
+            e=event;//获取事件对象
+            //获取事件在canvas中发生的位置
+            var x=e.clientX-a;
+            var y=e.clientY-b;
+            var data=get(c);
+            //如果事件位置在矩形区域中
+            if(c=="m_canvas")
+            {
+                if(x>=622*(1-data[0]/scale)+5 && x<=622+5 && y>=85 && y<=135)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=622*(1-data[1]/scale)+5 && x<=622+5 && y>=145 && y<=195)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=622*(1-data[2]/scale)+5 && x<=622+5 && y>=205 && y<=255)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=622*(1-data[3]/scale)+5 && x<=622+5 && y>=265 && y<=315)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=622*(1-data[4]/scale)+5 && x<=622+5 && y>=325 && y<=375)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=622*(1-data[5]/scale)+5 && x<=622+5 && y>=385 && y<=435)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=622*(1-data[6]/scale)+5 && x<=622+5 && y>=445 && y<=495)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=622*(1-data[7]/scale)+5 && x<=622+5 && y>=505 && y<=555)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+            }
+            else
+            {
+                if(x>=0 && x<=622*(data[0]/scale)+5 && y>=85 && y<=135)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=0 && x<=622*(data[1]/scale)+5 && y>=145 && y<=195)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=0 && x<=622*(data[2]/scale)+5 && y>=205 && y<=255)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=0 && x<=622*(data[3]/scale)+5 && y>=265 && y<=315)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=0 && x<=622*(data[4]/scale)+5 && y>=325 && y<=375)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=0 && x<=622*(data[5]/scale)+5 && y>=385 && y<=435)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=0 && x<=622*(data[6]/scale)+5 && y>=445 && y<=495)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+                if(x>=0 && x<=622*(data[7]/scale)+5 && y>=505 && y<=555)
+                {
+                    //改num
+                    window.open("age2.html");//打开指定链接
+                }
+            }
+        }
+        function init(a,scale)
+        {
+            var canvas = document.getElementById(a);
+            var context = canvas.getContext("2d");
+
+            context.moveTo(0,0);
+            context.lineTo(622,0);
+            context.stroke();
+
+            if(a=="m_canvas")
+            {
+                context.fillStyle="black";
+                context.font="20px Arial";
+                context.fillText("男",300,20);
+            }
+            else
+            {
+                context.fillStyle="black";
+                context.font="20px Arial";
+                context.fillText("女",300,20);
+            }
+
+            var data=get(a);
+            for(var i=0;i<8;i++)
+            {
+                if(a=="m_canvas")
+                {
+                    context.fillStyle="green";
+                    context.fillRect(622*(1-data[i]/scale),90+i*50+(i-1)*10,622*(data[i]/scale),50);
+                    context.font="10px Arial";
+                    context.fillText(data[i],622*(1-data[i]/scale)-10,90+i*50+(i-1)*10);
+                }
+                else
+                {
+                    context.fillStyle="green";
+                    context.fillRect(0,90+i*50+(i-1)*10,622*(data[i]/scale),50);
+                    context.font="10px Arial";
+                    context.fillText(data[i],622*(data[i]/scale),90+i*50+(i-1)*10);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div style="position:relative">
+        <hr style="width:1px;height:600px;" color="#D3D3D3">
+
+        <div id="m" style="position:absolute;left:0px;top:0px;">
+            <canvas id="m_canvas" width="622" height="600" onclick="cli(this.offsetLeft,this.offsetTop,this.id)"></canvas>
+        </div>
+
+        <div id="f" style="position:absolute;left:626px;top:0px;">
+            <canvas id="f_canvas" width="622" height="600" onclick="cli(626,0,this.id)"></canvas>
+        </div>
+        <p style="position:absolute;left:615px;top:50px;">10</p>
+        <p style="position:absolute;left:615px;top:110px;">20</p>
+        <p style="position:absolute;left:615px;top:170px;">30</p>
+        <p style="position:absolute;left:615px;top:230px;">40</p>
+        <p style="position:absolute;left:615px;top:290px;">50</p>
+        <p style="position:absolute;left:615px;top:350px;">60</p>
+        <p style="position:absolute;left:615px;top:410px;">70</p>
+        <p style="position:absolute;left:615px;top:470px;">80</p>
+        <p style="position:absolute;left:615px;top:530px;">90</p>
+
+        <!--
+        <a href="age2.html" style="position:absolute;left:300px;top:60px;"  >
+            <img src="1.svg" height="50px" width="300px">
+        </a>
+        -->
+
+    </div>
+
+    <script>
+        var scale=max();
+        init("m_canvas",scale);
+        init("f_canvas",scale);
+    </script>
+
+</body>
+</html>

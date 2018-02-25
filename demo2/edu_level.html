@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edu_level</title>
+    <script>
+        function get(a)
+        {
+            if(a=="f_canvas")
+            {
+                var data=new Array(100,50,30,40,60,70);
+                return data;
+            }
+            else
+            {
+                var data=new Array(80,90,50,30,20,10);
+                return data;
+            }
+        }
+        function max()
+        {
+            var data_a=get("f_canvas");
+            var data_b=get("m_canvas");
+            var maxnum=0;
+            for(var i=0;i<6;i++)
+            {
+                if(data_a[i]>maxnum)
+                {
+                    maxnum=data_a[i];
+                }
+            }
+            for(i=0;i<6;i++)
+            {
+                if(data_b[i]>maxnum)
+                {
+                    maxnum=data_b[i];
+                }
+            }
+            if(maxnum%10==0)
+            {
+                return maxnum+10;
+            }
+            else
+            {
+                return maxnum+(10-maxnum%10);
+            }
+        }
+        function init(a,scale)
+        {
+            var canvas = document.getElementById(a);
+            var context = canvas.getContext("2d");
+
+            context.moveTo(0,0);
+            context.lineTo(622,0);
+            context.stroke();
+
+            if(a=="m_canvas")
+            {
+                context.fillStyle="black";
+                context.font="20px Arial";
+                context.fillText("男",300,20);
+            }
+            else
+            {
+                context.fillStyle="black";
+                context.font="20px Arial";
+                context.fillText("女",300,20);
+            }
+
+            var data=get(a);
+            for(var i=0;i<6;i++)
+            {
+                if(a=="m_canvas")
+                {
+                    context.fillStyle="green";
+                    context.fillRect(622*(1-data[i]/scale),150+i*50+(i-1)*10,622*(data[i]/scale),50);
+                    context.font="10px Arial";
+                    context.fillText(data[i],622*(1-data[i]/scale)-10,150+i*50+(i-1)*10);
+                }
+                else
+                {
+                    context.fillStyle="green";
+                    context.fillRect(0,150+i*50+(i-1)*10,622*(data[i]/scale),50);
+                    context.font="10px Arial";
+                    context.fillText(data[i],622*(data[i]/scale),150+i*50+(i-1)*10);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div style="position:relative">
+        <hr style="width:1px;height:600px;" color="#D3D3D3">
+
+        <div id="m" style="position:absolute;left:0px;top:0px;">
+            <canvas id="m_canvas" width="622" height="600"></canvas>
+        </div>
+
+        <div id="f" style="position:absolute;left:626px;top:0px;">
+            <canvas id="f_canvas" width="622" height="600"></canvas>
+        </div>
+        <p style="position:absolute;left:580px;top:140px;">研究生及以上</p>
+        <p style="position:absolute;left:590px;top:200px;">大专/大本</p>
+        <p style="position:absolute;left:570px;top:260px;">高中/中专/中技</p>
+        <p style="position:absolute;left:610px;top:320px;">初中</p>
+        <p style="position:absolute;left:610px;top:380px;">小学</p>
+        <p style="position:absolute;left:610px;top:440px;">文盲</p>
+
+    </div>
+
+    <script>
+        var scale=max();
+        init("m_canvas",scale);
+        init("f_canvas",scale);
+    </script>
+</body>
+</html>
